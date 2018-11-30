@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link href="vanilla-raptorize.css" rel="stylesheet"/>
     <style type="text/css">
     * {
       box-sizing: border-box;
@@ -78,7 +79,9 @@
         <div class="bingo-square"></div>
       </div>
     </div>
+    <div class="bingo-win btn">I WON</div>
 
+    <script type="text/javascript" src="vanilla-raptorize.js"></script>
     <script type="text/javascript">
       function shuffleArray(array) {
           for (var i = array.length - 1; i > 0; i--) {
@@ -104,6 +107,8 @@
         .then(response => response.json())
         .then(jsonResponse => bingoRandomize(jsonResponse.cliches))
 
+      var myRaptor = Raptorize();
+      document.querySelector('.bingo-win').addEventListener('click', myRaptor.go);
     </script>
   </body>
 </html>
