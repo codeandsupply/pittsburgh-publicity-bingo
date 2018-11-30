@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    .bingo {
+      display; block;
+      width: 80vmin;
+      height: 80vmin;
+      margin: auto;
+    }
+
+    .bingo__inner {
+      width: 100%;
+      height: 100%;
+      border: 2px solid black;
+    }
+
+    .bingo-square {
+      font-size: 2vmin;
+      padding: 1vmin;
+      float: left;
+      width: 20%;
+      height: 20%;
+      border: 1px solid darkGray;
+      display: flex;
+      align-items: center;
+    }
+
+    #center-square {
+      background-color: lightPink;
+      font-weight: 900;
+    }
+
+    .btn {
+      cursor: pointer;
+      background-color: lightGray;
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin: 1em;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="bingo">
+      <div class="bingo__inner">
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square" id="center-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+        <div class="bingo-square"></div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function shuffleArray(array) {
+          for (var i = array.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1));
+              var temp = array[i];
+              array[i] = array[j];
+              array[j] = temp;
+          }
+      }
+
+      var bingoRandomize = function(cliches) {
+        var squares = document.querySelectorAll('.bingo-square');
+        shuffleArray(cliches);
+        for (var i = 0; i < squares.length ; i++) {
+          squares[i].innerText = cliches[i % cliches.length];
+        }
+        var centerSquare = document.getElementById('center-square');
+        centerSquare.innerText = freeSpaceText;
+      };
+
+      var freeSpaceText = "Not mentioning Code & Supply";
+      fetch('data/cliches.json')
+        .then(response => response.json())
+        .then(jsonResponse => bingoRandomize(jsonResponse.cliches))
+
+    </script>
+  </body>
+</html>
